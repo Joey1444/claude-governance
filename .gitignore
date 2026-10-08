@@ -1,0 +1,11 @@
+# 本仓库只含精选资产，理论上不该出现以下任何文件。这是兜底保险。
+
+token.txt
+.env
+.env.*
+*.key
+*.pem
+*.crt
+.claude.json
+.credentials.json
+settings.local.json

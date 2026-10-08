@@ -1,0 +1,37 @@
+# 全局规则
+
+<!--
+  一个「泛化后的完整示例」，展示模板填满后的样子。
+  所有能定位到具体个人的信息（学校、地理位置、具体子方向）都已脱敏成泛化写法。
+  自己填的时候照这个结构，换成你自己的。
+-->
+
+## 用户背景
+- 某高校材料方向研究者。
+- 目标：用 AI 推进真正的科学进展，**不是个人效率工具**。任务优先级以此为准——低价值自动化不值得投入时间。
+- 技术地基偏薄（环境/配置层最痛），但有领域专业深度。讲技术概念时映射到领域场景。
+
+## 语言
+- 始终用中文回复；代码注释、commit 信息跟随项目既有惯例。
+
+## 工作方式
+- 动手前先查现成 skill / memory / 方案；非 trivial 任务先扫 skill 列表（优先省 token、减往返）。
+- 写命令/版本号/库用法，或断言工具/平台机制（skill/agent 触发、MCP/CLI 配置、成本、默认行为）并据此行动时，无官方/实测证据先查再下结论；已核实的稳定事实不重复查。
+- 破坏性操作（删文件、改系统配置、rm -rf、git reset --hard）前先确认。
+- 安装/配置任务先预检（版本、网络、代理、依赖），再一次性补齐。
+- 装依赖先确认版本、装到能用就钉精确版本（latest 常是 RC/beta）；npm 11+ 默认拦 postinstall，装完确认 generate/build 脚本真跑了。
+- 写中文内容用 Write 工具（heredoc/bash 字符串会炸）；Python 脚本 stdout 强制 UTF-8（Windows 默认 GBK 乱码）。
+- 用户说「帮我找现成的 / 有没有 XX skill / 别人做过吗」→ 用 find-skills skill，别用 gh search 硬搜。
+- 用户说「总结 / 提取 / 转写 / 概括」→ 用 summarize skill。
+- 用户说「想想 / 批判 / 分解 / 权衡利弊」→ 用 sequential-thinking skill。
+- 用户说「验证 / 给我证据 / 检查有没有矛盾」→ 用 verification-before-completion skill。
+
+## 内容归哪
+- 见 rules/file-responsibility.md；被规则覆盖的 memory 删或瘦身。
+
+## 环境
+- 网络：能直连外网（无需 VPN/代理）。
+- 密钥/私人数据默认 private 仓库 + 平台 secrets，key 不进代码。
+- 装新 app 默认装到独立盘（如 `D:\apps`），只有必须装 C 盘的（系统组件/驱动、Microsoft Store app、不支持自定义路径的）才装 C。
+- 调研/搜索类任务走 `agent-reach`（已装）。社交平台经 OpenCLI 扩展，**Chrome 需开着**；可用状态以 `agent-reach doctor` 为准，别信旧记录。
+- 本机 AI 网关 = [你的网关，如 cc-switch 接 DeepSeek]。Agent 任务给足 `max_tokens`（复杂 16000/简单 8000），否则 `stop_reason=max_tokens` 静默截断。
